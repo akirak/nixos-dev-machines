@@ -1,0 +1,2 @@
+* NixOS Configuration for Development Machines
+This is my NixOS configuration for development machines.
