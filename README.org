@@ -1,2 +1,27 @@
 * NixOS Configuration for Development Machines
 This is my NixOS configuration for development machines.
+** Installation
+*** Restoring an existing host
+*** Adding a new host
+** Notes
+*** Git hooks
+**** pre-commit hook
+*** Makefile
+#+begin_src makefile :tangle Makefile
+  tangle:
+          emacs --batch --eval "(progn (require 'ob) (org-babel-tangle-file \"README.org\"))"; \
+#+end_src
+*** Bootstraping
+#+begin_src sh :tangle install-mnt.sh
+  #!/bin/sh
+
+  hostname="$1"
+  origin="https://github.com/akirak/nixos-dev-machines.git"
+
+  if [ -z "$hostname" ]; then
+      err "Please specify the hostname as the first argument"
+  fi
+
+#+end_src
+** Also see
+[[https://github.com/akirak/home.nix][My home-manager configuration]] is a companion to this repository.
