@@ -4,6 +4,9 @@
 
 { config, pkgs, ... }:
 
+let
+  user = "akirakomamura";
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -43,6 +46,11 @@
   environment.systemPackages = with pkgs; [
     vim
     xorg.xinit
+  ];
+
+  environment.shells = [
+    pkgs.bashInteractive
+    "/home/${user}/.nix-profile/bin/zsh"
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -116,7 +124,7 @@ exec $HOME/.xinitrc
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.akirakomamura = {
+  users.users."${user}" = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
   };
