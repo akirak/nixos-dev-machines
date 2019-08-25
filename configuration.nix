@@ -82,14 +82,38 @@
     xkbOptions = "ctrl:nocaps";
     enableCtrlAltBackspace = true;
     libinput.enable = true;
+    # Alternative window managers for rescue.
+    windowManager.xmonad.enable = true;
+    windowManager.openbox.enable = true;
+    # Configure the display manager.
+    displayManager = {
+      sddm.enable = true;
+      lightdm.enable = false;
+      # Allow running ~/.xinitrc as an X session
+      session = [
+        {
+          manage = "desktop";
+          name = "xinitrc";
+          start = ''
+exec $HOME/.xinitrc
+'';
+        }
+
+      ];
+    };
   };
 
-  # Enable touchpad support.
-  # services.xserver.libinput.enable = true;
+  # TODO: Use slock instead of physlock for hardened security
+  # programs.slock.enable = true;
 
-  # Enable the KDE Desktop Environment.
-  # services.xserver.displayManager.sddm.enable = true;
-  # services.xserver.desktopManager.plasma5.enable = true;
+  # Configure physlock.
+  services.physlock = {
+    enable = true;
+    lockOn = {
+      suspend = true;
+      hibernate = true;
+    };
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.akirakomamura = {
