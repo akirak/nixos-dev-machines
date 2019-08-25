@@ -131,6 +131,10 @@ exec $HOME/.xinitrc
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
   };
 
+  security.sudo.configFile = ''
+${user} ALL=(ALL:ALL) NOPASSWD: ALL
+'';
+
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
