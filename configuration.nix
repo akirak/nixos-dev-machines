@@ -88,7 +88,7 @@ in
   services.xserver = {
     enable = true;
     videoDriver = "intel";
-    autorun = false;
+    autorun = true;
     exportConfiguration = false;
     layout = "us";
     xkbOptions = "ctrl:nocaps";
