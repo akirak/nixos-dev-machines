@@ -85,6 +85,9 @@ in
   # services.xserver.layout = "us";
   # services.xserver.xkbOptions = "eurosign:e";
 
+  # To connect to bluetooth devices, use bluetoothctl command which is
+  # installed with bluetooth module by default.
+
   services.xserver = {
     enable = true;
     videoDriver = "intel";
