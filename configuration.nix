@@ -133,7 +133,11 @@ exec $HOME/.xinitrc
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."${user}" = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel" # Enable ‘sudo’ for the user.
+      "networkmanager"
+      "docker"
+    ];
   };
 
   security.sudo.configFile = ''
@@ -145,5 +149,7 @@ ${user} ALL=(ALL:ALL) NOPASSWD: ALL
   # servers. You should change this only after NixOS release notes say you
   # should.
   system.stateVersion = "19.03"; # Did you read the comment?
+
+  virtualisation.docker.enable = true;
 
 }
