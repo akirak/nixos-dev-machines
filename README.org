@@ -14,14 +14,21 @@ This is my NixOS configuration for development machines.
 *** Bootstraping
 #+begin_src sh :tangle install-mnt.sh
   #!/bin/sh
+  set -e
 
   hostname="$1"
   origin="https://github.com/akirak/nixos-dev-machines.git"
+  root=/mnt
 
   if [ -z "$hostname" ]; then
       err "Please specify the hostname as the first argument"
   fi
 
+  branch="machine/$hostname"
+
+  dest="$root/etc/nixos"
+  mkdir -p "$(dirname $dest)"
+  git clone -b "$branch" --recursive "$origin" "$dest"
 #+end_src
 ** Also see
 [[https://github.com/akirak/home.nix][My home-manager configuration]] is a companion to this repository.
