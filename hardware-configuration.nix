@@ -12,6 +12,7 @@
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+  boot.tmpOnTmpfs = true;
 
   boot.initrd.luks.devices = [
     {
