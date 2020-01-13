@@ -25,7 +25,7 @@ in
   networking.networkmanager.enable = true;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  networking.dnsExtensionMechanism = false; # Disable edns0 in resolv.conf
+  networking.resolvconf.dnsExtensionMechanism = false; # Disable edns0 in resolv.conf
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -148,7 +148,7 @@ ${user} ALL=(ALL:ALL) NOPASSWD: ALL
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "19.03"; # Did you read the comment?
+  system.stateVersion = "19.09"; # Did you read the comment?
 
   virtualisation.docker.enable = true;
 
