@@ -20,7 +20,7 @@ in
   # Allow starting other operating systems on the machine
   boot.loader.grub.useOSProber = true;
 
-  networking.hostName = "WN007"; # Define your hostname.
+  networking.hostName = "Chen"; # Define your hostname.
 
   networking.networkmanager.enable = true;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
