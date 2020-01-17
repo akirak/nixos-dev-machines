@@ -46,8 +46,6 @@ in
   environment.systemPackages = with pkgs; [
     vim
     xorg.xinit
-    vscode-with-extensions
-    slack
   ];
 
   environment.shells = [
