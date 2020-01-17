@@ -55,6 +55,8 @@ in
     "/home/${user}/.nix-profile/bin/zsh"
   ];
 
+  nix.useSandbox = true;
+
   nixpkgs.config.allowUnfree = true;
 
   # Some programs need SUID wrappers, can be configured further or are
