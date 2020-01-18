@@ -46,6 +46,7 @@ in
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     coreutils
+    gptfdisk
     unzip
     vim
     gnome3.adwaita-icon-theme
