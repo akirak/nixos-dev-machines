@@ -105,7 +105,6 @@ in
     desktopManager = {
       gnome3.enable = true;
     };
-    windowManager.xmonad.enable = true;
     windowManager.openbox.enable = true;
     # Configure the display manager.
     displayManager = {
