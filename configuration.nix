@@ -51,9 +51,9 @@ in
     xorg.xinit
   ];
 
-  environment.shells = [
-    pkgs.bashInteractive
-    "/home/${user}/.nix-profile/bin/zsh"
+  environment.shells = with pkgs; [
+    zsh
+    bashInteractive
   ];
 
   nix.useSandbox = true;
@@ -144,6 +144,8 @@ exec $HOME/.xinitrc
       hibernate = true;
     };
   };
+
+  users.defaultUserShell = pkgs.zsh;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."${user}" = {
