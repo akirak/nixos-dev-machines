@@ -144,6 +144,7 @@ exec $HOME/.xinitrc
     extraGroups = [
       "wheel" # Enable ‘sudo’ for the user.
       "networkmanager"
+      "vboxusers"
       # "docker"
     ];
   };
@@ -157,5 +158,7 @@ exec $HOME/.xinitrc
   system.stateVersion = "19.09"; # Did you read the comment?
 
   # virtualisation.docker.enable = true;
+
+  virtualisation.virtualbox.host.enable = true;
 
 }
