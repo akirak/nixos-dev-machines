@@ -6,6 +6,7 @@
 
 let
   user = "akirakomamura";
+  useDisplayManager = true;
 in
 {
   imports =
@@ -98,7 +99,7 @@ in
   services.xserver = {
     enable = true;
     videoDriver = "intel";
-    autorun = true;
+    autorun = useDisplayManager;
     exportConfiguration = false;
     layout = "us";
     xkbOptions = "ctrl:nocaps";
@@ -139,7 +140,7 @@ exec $HOME/.xinitrc
 
   # Configure physlock.
   services.physlock = {
-    enable = true;
+    enable = ! useDisplayManager;
     lockOn = {
       suspend = true;
       hibernate = true;
