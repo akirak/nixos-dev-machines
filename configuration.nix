@@ -45,6 +45,7 @@ in
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim
+    gnome3.adwaita-icon-theme
     xorg.xinit
   ];
 
@@ -61,6 +62,9 @@ in
   # started in user sessions.
   # programs.mtr.enable = true;
   # programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
+  programs = {
+    dconf.enable = true;
+  };
 
   # List services that you want to enable:
 
@@ -98,11 +102,15 @@ in
     enableCtrlAltBackspace = true;
     libinput.enable = true;
     # Alternative window managers for rescue.
+    desktopManager = {
+      gnome3.enable = true;
+    };
     windowManager.xmonad.enable = true;
     windowManager.openbox.enable = true;
     # Configure the display manager.
     displayManager = {
-      sddm.enable = true;
+      gdm.enable = true;
+      # sddm.enable = true;
       lightdm.enable = false;
       # Allow running ~/.xinitrc as an X session
       session = [
