@@ -109,7 +109,13 @@ in
     windowManager.openbox.enable = true;
     # Configure the display manager.
     displayManager = {
-      gdm.enable = true;
+      gdm = {
+        enable = true;
+        autoLogin = {
+          enable = true;
+          user = "${user}";
+        };
+      };
       # sddm.enable = true;
       lightdm.enable = false;
       # Allow running ~/.xinitrc as an X session
