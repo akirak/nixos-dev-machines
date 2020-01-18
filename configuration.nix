@@ -148,9 +148,7 @@ exec $HOME/.xinitrc
     ];
   };
 
-  security.sudo.configFile = ''
-${user} ALL=(ALL:ALL) NOPASSWD: ALL
-'';
+  security.sudo.wheelNeedsPassword = false;
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
