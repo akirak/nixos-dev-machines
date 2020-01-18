@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+DEST=/mnt
+NIXOS_DIR="${DEST}/etc/nixos"
+CONFIG_OWNER=$USER
+REPO=https://github.com/akirak/nixos-dev-machines.git
+BASE_BRANCH=master
+
+set -e
+
+error() { echo "$*" >&2; }
+
+isMountPoint() {
+    grep -F "$1" /etc/mtab >/dev/null
+}
+
+if [[ ! -d ${DEST} ]]; then
+    error "${DEST} must exist"
+    exit 1
+fi
+
+if ! isMountPoint "${DEST}"; then
+    error "${DEST} must be a mount point"
+    exit 1
+fi
+
+if [[ ! -d "${NIXOS_DIR}" ]]; then
+    sudo mkdir -p "${NIXOS_DIR}"
+    sudo chown -R "${CONFIG_OWNER}" "${NIXOS_DIR}"
+    git clone -b "${BASE_BRANCH}" "${REPO}" "${NIXOS_DIR}"
+    echo -n "Enter a hostname: "
+    read -r NEW_HOSTNAME
+    cd "${NIXOS_DIR}"
+    git checkout -b "machine/${NEW_HOSTNAME}"
+    nixos-generate-config --show-hardware-config \
+        | sudo tee "${NIXOS_DIR}/hardware-configuration.nix" > /dev/null
+fi
+
+echo "Initial configuration finished."
+echo
+echo "Edit ${NIXOS_DIR}/hardware-configuration.nix and run"
+echo
+echo "    sudo nixos-install ${DEST}"
+echo
+
+if [[ -v EDITOR ]]; then
+    echo "Editing the hardware configuration..."
+    $EDITOR "${NIXOS_DIR}/hardware-configuration.nix"
+fi
