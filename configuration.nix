@@ -116,8 +116,8 @@ in
       gdm = {
         enable = true;
         autoLogin = {
-          enable = true;
-          user = "${user}";
+          enable = false;
+          # user = "${user}";
         };
       };
       # sddm.enable = true;
