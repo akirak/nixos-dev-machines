@@ -177,4 +177,7 @@ exec $HOME/.xinitrc
 
   virtualisation.virtualbox.host.enable = true;
 
+  virtualisation.lxc.enable = true;
+  virtualisation.lxd.enable = true;
+
 }
