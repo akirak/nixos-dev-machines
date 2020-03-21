@@ -40,6 +40,12 @@
       options = [ "relatime" "discard" ];
     };
 
+  fileSystems."/var/lib/docker" =
+    { device = "/dev/mapper/ChenSSD-docker";
+      fsType = "f2fs";
+      options = [ "relatime" "discard" ];
+    };
+
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/4D96-EC44";
       fsType = "vfat";
