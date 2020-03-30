@@ -17,7 +17,7 @@
   boot.initrd.luks.devices = [
     {
       name = "cryptsystem";
-      device = "/dev/disk/by-uuid/5902b013-1abb-4776-946e-d4fc99810eb2";
+      device = "/dev/disk/by-uuid/7acea7fe-cd80-4f03-8e3c-c962f0b6ab9f";
       preLVM = true;
       allowDiscards = true;
     }
@@ -36,7 +36,7 @@
 
   fileSystems."/var" =
     { device = "/dev/mapper/ChenSSD-var";
-      fsType = "ext4";
+      fsType = "f2fs";
       options = [ "relatime" "discard" ];
     };
 
@@ -47,7 +47,7 @@
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/4D96-EC44";
+    { device = "/dev/disk/by-uuid/1A23-DAFD";
       fsType = "vfat";
     };
 
