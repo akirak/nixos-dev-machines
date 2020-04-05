@@ -52,6 +52,7 @@ in
     gnome3.adwaita-icon-theme
     gnome3.gnome-tweak-tool
     xorg.xinit
+    # python2.7-yubikey-neo-manager
   ];
 
   environment.shells = with pkgs; [
@@ -149,6 +150,14 @@ exec $HOME/.xinitrc
   };
 
   services.psd = {
+    enable = true;
+  };
+
+  services.udev.packages = [
+    pkgs.yubikey-personalization
+  ];
+
+  services.pcscd = {
     enable = true;
   };
 
