@@ -60,7 +60,14 @@ in
     bashInteractive
   ];
 
-  nix.useSandbox = true;
+  nix = {
+    useSandbox = true;
+    trustedUsers = [
+      "root"
+      user
+      "@wheel"
+    ];
+  };
 
   nixpkgs.config.allowUnfree = true;
 
