@@ -6,6 +6,7 @@
 
 let
   user = "akirakomamura";
+  emacs27User = "emacs27";
   useDisplayManager = true;
 in
 {
@@ -65,6 +66,7 @@ in
     trustedUsers = [
       "root"
       user
+      emacs27User
       "@wheel"
     ];
   };
@@ -187,7 +189,17 @@ exec $HOME/.xinitrc
     ];
   };
 
+  users.users."${emacs27User}" = {
+    isNormalUser = true;
+    extraGroups = [
+      "wheel" # Enable ‘sudo’ for the user.
+      "networkmanager"
+    ];
+  };
+
   security.sudo.wheelNeedsPassword = false;
+
+  security.pam.services."${emacs27User}".forwardXAuth = true;
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
