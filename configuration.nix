@@ -197,6 +197,14 @@ exec $HOME/.xinitrc
     ];
   };
 
+  users.groups."${emacs27User}" = {
+    gid = 1001;
+    members = [
+      user
+      emacs27User
+    ];
+  };
+
   security.sudo.wheelNeedsPassword = false;
 
   security.pam.services."${emacs27User}".forwardXAuth = true;
