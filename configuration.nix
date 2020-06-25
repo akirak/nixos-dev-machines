@@ -49,6 +49,7 @@ in
     gptfdisk
     unzip
     vim
+    fuse-overlayfs
     gnome3.adwaita-icon-theme
     gnome3.gnome-tweak-tool
     xorg.xinit
