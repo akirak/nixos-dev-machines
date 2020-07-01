@@ -188,6 +188,11 @@ exec $HOME/.xinitrc
     ];
   };
 
+  users.groups."${user}" = {
+    members = [ user ];
+    gid = 1000;
+  };
+
   security.sudo.wheelNeedsPassword = false;
 
   # This value determines the NixOS release with which your system is to be
