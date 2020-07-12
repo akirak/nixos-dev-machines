@@ -54,6 +54,7 @@ in
     gnome3.gnome-tweak-tool
     xorg.xinit
     # python2.7-yubikey-neo-manager
+    xorg.xf86inputlibinput
   ];
 
   environment.shells = with pkgs; [
