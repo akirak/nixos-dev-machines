@@ -55,6 +55,7 @@ in
     xorg.xinit
     # python2.7-yubikey-neo-manager
     xorg.xf86inputlibinput
+    stack
   ];
 
   environment.shells = with pkgs; [
