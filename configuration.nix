@@ -70,6 +70,12 @@ in
       user
       "@wheel"
     ];
+    # Options for nix-direnv.
+    # See https://github.com/nix-community/nix-direnv
+    extraOptions = ''
+      keep-outputs = true
+      keep-derivations = true
+    '';
   };
 
   nixpkgs.config.allowUnfree = true;
