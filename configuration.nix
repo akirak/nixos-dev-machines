@@ -42,6 +42,10 @@ in
   # Set your time zone.
   time.timeZone = "Asia/Tokyo";
 
+  fonts = {
+    fonts = [ pkgs.dejavu_fonts ];
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
