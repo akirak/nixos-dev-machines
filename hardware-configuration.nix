@@ -14,14 +14,15 @@
   boot.extraModulePackages = [ ];
   boot.tmpOnTmpfs = true;
 
-  boot.initrd.luks.devices = [
+  boot.initrd.luks.devices =
     {
+      cryptsystem = {
       name = "cryptsystem";
       device = "/dev/disk/by-uuid/7acea7fe-cd80-4f03-8e3c-c962f0b6ab9f";
       preLVM = true;
       allowDiscards = true;
-    }
-  ];
+      };
+    };
 
  fileSystems."/" =
    { device = "/dev/mapper/ChenSSD-root";
@@ -62,7 +63,7 @@
   nix.maxJobs = lib.mkDefault 8;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   # High-DPI console
-  i18n.consoleFont = lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
+  console.font = lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
 
   hardware = {
     bluetooth = {
