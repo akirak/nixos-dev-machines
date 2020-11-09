@@ -15,11 +15,18 @@
   boot.extraModulePackages = [];
   boot.tmpOnTmpfs = true;
 
+  boot.initrd.luks.reusePassphrases = true;
   boot.initrd.luks.devices =
     {
       cryptsystem = {
         name = "cryptsystem";
         device = "/dev/disk/by-uuid/7acea7fe-cd80-4f03-8e3c-c962f0b6ab9f";
+        preLVM = true;
+        allowDiscards = true;
+      };
+
+      cryptdata = {
+        device = "/dev/disk/by-uuid/400a1403-8fe8-4817-a4fb-b6ec7b0fd0d0";
         preLVM = true;
         allowDiscards = true;
       };
@@ -48,9 +55,10 @@
 
   fileSystems."/var/lib/docker" =
     {
-      device = "/dev/mapper/ChenSSD-docker";
+      device = "/dev/mapper/860qvo1t-docker";
       fsType = "f2fs";
       options = [ "relatime" "discard" ];
+      noCheck = true;
     };
 
   fileSystems."/boot" =
@@ -62,6 +70,13 @@
   fileSystems."/home" =
     {
       device = "/dev/mapper/ChenSSD-home";
+      fsType = "ext4";
+      options = [ "relatime" "discard" ];
+    };
+
+  fileSystems."/public" =
+    {
+      device = "/dev/mapper/860qvo1t-public";
       fsType = "ext4";
       options = [ "relatime" "discard" ];
     };
