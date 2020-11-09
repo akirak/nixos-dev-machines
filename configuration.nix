@@ -160,9 +160,6 @@ in
     };
   };
 
-  # TODO: Use slock instead of physlock for hardened security
-  # programs.slock.enable = true;
-
   services.gnome3 = {
     chrome-gnome-shell.enable = true;
   };
