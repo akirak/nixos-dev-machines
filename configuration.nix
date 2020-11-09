@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   user = "akirakomamura";
@@ -10,7 +10,8 @@ let
 in
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -34,8 +35,8 @@ in
 
   # Select internationalisation properties.
   i18n = {
-  #   consoleFont = "Lat2-Terminus16";
-  #   consoleKeyMap = "us";
+    #   consoleFont = "Lat2-Terminus16";
+    #   consoleKeyMap = "us";
     defaultLocale = "en_US.UTF-8";
   };
 
@@ -151,8 +152,8 @@ in
           manage = "desktop";
           name = "xinitrc";
           start = ''
-exec $HOME/.xinitrc
-'';
+            exec $HOME/.xinitrc
+          '';
         }
 
       ];
