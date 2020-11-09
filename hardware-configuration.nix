@@ -36,6 +36,7 @@
     {
       device = "/dev/mapper/ChenSSD-nix";
       fsType = "f2fs";
+      noCheck = true;
     };
 
   fileSystems."/var" =
