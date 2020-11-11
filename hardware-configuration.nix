@@ -37,6 +37,9 @@
       device = "/dev/mapper/ChenSSD-root";
       fsType = "ext4";
       options = [ "relatime" "discard" ];
+      # This filesystem contains a key file needed to unlock /private,
+      # so you have to set this flag.
+      neededForBoot = true;
     };
 
   fileSystems."/nix" =
@@ -79,6 +82,22 @@
       device = "/dev/mapper/860qvo1t-public";
       fsType = "ext4";
       options = [ "relatime" "discard" ];
+    };
+
+  fileSystems."/private" =
+    {
+      device = "/dev/mapper/860qvo1t-private_crypt";
+      fsType = "ext4";
+      options = [ "relatime" "discard" ];
+      # This is an encrypted logical volume inside LVM encrypted on
+      # LUKS. It resides in the same logical volume as /public, but it
+      # is not visible from some computers that can access /public.
+      encrypted = {
+        enable = true;
+        label = "860qvo1t-private_crypt";
+        blkDev = "/dev/mapper/860qvo1t-private";
+        keyFile = "/mnt-root/etc/luks/private-lv.keyfile";
+      };
     };
 
   swapDevices = [];
