@@ -75,9 +75,11 @@ in
       user
       "@wheel"
     ];
-    # Options for nix-direnv.
-    # See https://github.com/nix-community/nix-direnv
     extraOptions = ''
+      experimental-features = nix-command flakes
+
+      # Options needed to use nix-direnv.
+      # See https://github.com/nix-community/nix-direnv
       keep-outputs = true
       keep-derivations = true
     '';
