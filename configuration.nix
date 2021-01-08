@@ -61,12 +61,47 @@ in
     # python2.7-yubikey-neo-manager
     xorg.xf86inputlibinput
     stack
+
+    # podman installation for NixOS 20.03
+    # https://nixos.wiki/wiki/Podman
+    podman
+    runc
+    conmon
+    slirp4netns
   ];
 
   environment.shells = with pkgs; [
     zsh
     bashInteractive
   ];
+
+  environment.etc."containers/policy.json" = {
+    mode = "0644";
+    text = ''
+      {
+        "default": [
+          {
+            "type": "insecureAcceptAnything"
+          }
+        ],
+        "transports":
+          {
+            "docker-daemon":
+              {
+                "": [{"type":"insecureAcceptAnything"}]
+              }
+          }
+      }
+    '';
+  };
+
+  environment.etc."containers/registries.conf" = {
+    mode = "0644";
+    text = ''
+      [registries.search]
+      registries = ['docker.io', 'quay.io']
+    '';
+  };
 
   nix = {
     useSandbox = true;
@@ -199,6 +234,10 @@ in
       # "vboxusers"
       "docker"
     ];
+
+    # For podman
+    subUidRanges = [ { startUid = 100000; count = 65536; } ];
+    subGidRanges = [ { startGid = 100000; count = 65536; } ];
   };
 
   users.groups."${user}" = {
@@ -214,10 +253,15 @@ in
   # should.
   system.stateVersion = "20.09"; # Did you read the comment?
 
+  # Not available in this version
+  # virtualisation.podman = {
+  #   enable = true;
+  # };
+
   virtualisation.docker = {
-    enable = true;
-    enableOnBoot = true;
-    autoPrune.enable = true;
+    enable = false;
+    enableOnBoot = false;
+    autoPrune.enable = false;
   };
 
   virtualisation.virtualbox.host.enable = true;
