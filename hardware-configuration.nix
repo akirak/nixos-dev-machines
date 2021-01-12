@@ -64,6 +64,13 @@
       noCheck = true;
     };
 
+  fileSystems."/var/lib/postgresql" =
+    {
+      device = "/dev/mapper/ChenSSD-postgres";
+      fsType = "ext4";
+      options = [ "relatime" "discard" ];
+    };
+
   fileSystems."/boot" =
     {
       device = "/dev/disk/by-uuid/1A23-DAFD";
