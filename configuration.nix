@@ -247,6 +247,28 @@ in
 
   security.sudo.wheelNeedsPassword = false;
 
+  services.postgresql = {
+    enable = true;
+    package = pkgs.postgresql_12;
+    enableTCPIP = true;
+    dataDir = "/var/lib/postgresql/12-devel";
+    authentication = pkgs.lib.mkOverride 12 ''
+      local all all trust
+      host all all ::1/128 trust
+    '';
+    ensureUsers = [
+      {
+        name = "postgres";
+      }
+    ];
+    ensureDatabases = [
+      "postgres"
+    ];
+    # This is the default port number of PostgreSQL.
+    # I will use it primarily for development on this machine.
+    port = 5432;
+  };
+
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
