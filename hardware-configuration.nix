@@ -122,4 +122,16 @@
       enable = true;
     };
   };
+
+  # Based on https://github.com/adam-savard/keychron-k2-function-keys-linux
+  systemd.services.keychron = {
+    description = "Workaround to make the function keys on Keychron keyboards work";
+    wantedBy = [ "multi-user.target" ];
+
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "/bin/sh -c 'echo 0 | tee /sys/module/hid_apple/parameters/fnmode'";
+    };
+  };
+
 }
