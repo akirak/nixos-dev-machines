@@ -68,6 +68,8 @@ in
     runc
     conmon
     slirp4netns
+
+    brave
   ];
 
   environment.shells = with pkgs; [
