@@ -64,10 +64,10 @@ in
 
     # podman installation for NixOS 20.03
     # https://nixos.wiki/wiki/Podman
-    podman
-    runc
-    conmon
-    slirp4netns
+    # podman
+    # runc
+    # conmon
+    # slirp4netns
 
     brave
   ];
@@ -77,33 +77,33 @@ in
     bashInteractive
   ];
 
-  environment.etc."containers/policy.json" = {
-    mode = "0644";
-    text = ''
-      {
-        "default": [
-          {
-            "type": "insecureAcceptAnything"
-          }
-        ],
-        "transports":
-          {
-            "docker-daemon":
-              {
-                "": [{"type":"insecureAcceptAnything"}]
-              }
-          }
-      }
-    '';
-  };
+  # environment.etc."containers/policy.json" = {
+  #   mode = "0644";
+  #   text = ''
+  #     {
+  #       "default": [
+  #         {
+  #           "type": "insecureAcceptAnything"
+  #         }
+  #       ],
+  #       "transports":
+  #         {
+  #           "docker-daemon":
+  #             {
+  #               "": [{"type":"insecureAcceptAnything"}]
+  #             }
+  #         }
+  #     }
+  #   '';
+  # };
 
-  environment.etc."containers/registries.conf" = {
-    mode = "0644";
-    text = ''
-      [registries.search]
-      registries = ['docker.io', 'quay.io']
-    '';
-  };
+  # environment.etc."containers/registries.conf" = {
+  #   mode = "0644";
+  #   text = ''
+  #     [registries.search]
+  #     registries = ['docker.io', 'quay.io']
+  #   '';
+  # };
 
   nix = {
     useSandbox = true;
@@ -237,9 +237,9 @@ in
       "docker"
     ];
 
-    # For podman
-    subUidRanges = [ { startUid = 100000; count = 65536; } ];
-    subGidRanges = [ { startGid = 100000; count = 65536; } ];
+    # For old manual configuration of podman
+    # subUidRanges = [ { startUid = 100000; count = 65536; } ];
+    # subGidRanges = [ { startGid = 100000; count = 65536; } ];
   };
 
   users.groups."${user}" = {
@@ -286,6 +286,11 @@ in
     enable = false;
     enableOnBoot = false;
     autoPrune.enable = false;
+  };
+
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
   };
 
   virtualisation.virtualbox.host.enable = true;
