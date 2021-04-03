@@ -15,12 +15,16 @@ in
       ./hardware-configuration.nix
     ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # Allow starting other operating systems on the machine
-  boot.loader.grub.useOSProber = true;
+  boot.loader = {
+    efi = {
+      canTouchEfiVariables = true;
+    };
+    grub = {
+      efiSupport = true;
+      device = "nodev";
+      configurationLimit = 5;
+    };
+  };
 
   networking.hostName = "Chen"; # Define your hostname.
 
@@ -64,10 +68,10 @@ in
 
     # podman installation for NixOS 20.03
     # https://nixos.wiki/wiki/Podman
-    podman
-    runc
-    conmon
-    slirp4netns
+    # podman
+    # runc
+    # conmon
+    # slirp4netns
 
     brave
   ];
@@ -77,33 +81,33 @@ in
     bashInteractive
   ];
 
-  environment.etc."containers/policy.json" = {
-    mode = "0644";
-    text = ''
-      {
-        "default": [
-          {
-            "type": "insecureAcceptAnything"
-          }
-        ],
-        "transports":
-          {
-            "docker-daemon":
-              {
-                "": [{"type":"insecureAcceptAnything"}]
-              }
-          }
-      }
-    '';
-  };
+  # environment.etc."containers/policy.json" = {
+  #   mode = "0644";
+  #   text = ''
+  #     {
+  #       "default": [
+  #         {
+  #           "type": "insecureAcceptAnything"
+  #         }
+  #       ],
+  #       "transports":
+  #         {
+  #           "docker-daemon":
+  #             {
+  #               "": [{"type":"insecureAcceptAnything"}]
+  #             }
+  #         }
+  #     }
+  #   '';
+  # };
 
-  environment.etc."containers/registries.conf" = {
-    mode = "0644";
-    text = ''
-      [registries.search]
-      registries = ['docker.io', 'quay.io']
-    '';
-  };
+  # environment.etc."containers/registries.conf" = {
+  #   mode = "0644";
+  #   text = ''
+  #     [registries.search]
+  #     registries = ['docker.io', 'quay.io']
+  #   '';
+  # };
 
   nix = {
     useSandbox = true;
@@ -177,12 +181,12 @@ in
     windowManager.openbox.enable = true;
     # Configure the display manager.
     displayManager = {
+      autoLogin = {
+        enable = true;
+        user = "${user}";
+      };
       gdm = {
         enable = true;
-        autoLogin = {
-          enable = false;
-          # user = "${user}";
-        };
       };
       # sddm.enable = true;
       lightdm.enable = false;
@@ -237,9 +241,9 @@ in
       "docker"
     ];
 
-    # For podman
-    subUidRanges = [ { startUid = 100000; count = 65536; } ];
-    subGidRanges = [ { startGid = 100000; count = 65536; } ];
+    # For old manual configuration of podman
+    # subUidRanges = [ { startUid = 100000; count = 65536; } ];
+    # subGidRanges = [ { startGid = 100000; count = 65536; } ];
   };
 
   users.groups."${user}" = {
@@ -286,6 +290,11 @@ in
     enable = false;
     enableOnBoot = false;
     autoPrune.enable = false;
+  };
+
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
   };
 
   virtualisation.virtualbox.host.enable = true;
