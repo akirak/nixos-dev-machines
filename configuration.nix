@@ -181,12 +181,12 @@ in
     windowManager.openbox.enable = true;
     # Configure the display manager.
     displayManager = {
+      autoLogin = {
+        enable = true;
+        user = "${user}";
+      };
       gdm = {
         enable = true;
-        autoLogin = {
-          enable = false;
-          # user = "${user}";
-        };
       };
       # sddm.enable = true;
       lightdm.enable = false;
