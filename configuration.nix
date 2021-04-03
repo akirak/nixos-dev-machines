@@ -15,12 +15,16 @@ in
       ./hardware-configuration.nix
     ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # Allow starting other operating systems on the machine
-  boot.loader.grub.useOSProber = true;
+  boot.loader = {
+    efi = {
+      canTouchEfiVariables = true;
+    };
+    grub = {
+      efiSupport = true;
+      device = "nodev";
+      configurationLimit = 5;
+    };
+  };
 
   networking.hostName = "Chen"; # Define your hostname.
 
