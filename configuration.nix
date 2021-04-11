@@ -26,6 +26,8 @@ in
     };
   };
 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   networking.hostName = "Chen"; # Define your hostname.
 
   networking.networkmanager.enable = true;
