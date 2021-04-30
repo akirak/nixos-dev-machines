@@ -34,6 +34,12 @@ in
     "${./secrets/hosts}"
   ];
 
+  programs.ssh.extraConfig = ''
+    # Log in to Raspberry Pi as root
+    Host rpi4
+      User root
+  '';
+
   networking.networkmanager.enable = true;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
