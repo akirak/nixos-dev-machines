@@ -157,10 +157,12 @@ in
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 2022 ];
+  };
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -256,6 +258,10 @@ in
     # For old manual configuration of podman
     # subUidRanges = [ { startUid = 100000; count = 65536; } ];
     # subGidRanges = [ { startGid = 100000; count = 65536; } ];
+
+    openssh.authorizedKeys.keys = [
+      "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAFBeyUjFjmJq18tMX8NeZY4tHiKweMpNsMzTx0553V0hLeENFkyz6Go6XedLqX4WTCQiW8nOscniXKUQhPmVgvBuQB8feQfXvXbZ+TtiuSfVo/bT0MVAACEHR8Ps2UyssyyxByawGasqIWjGZ/k3WdrrEygQkHHpB89IsSel+y/0fhjYA== akirakomamura@penguin"
+    ];
   };
 
   users.groups."${user}" = {
@@ -285,6 +291,20 @@ in
     # This is the default port number of PostgreSQL.
     # I will use it primarily for development on this machine.
     port = 5432;
+  };
+
+  # Allow login from other machines
+  services.openssh = {
+    enable = true;
+    passwordAuthentication = false;
+    permitRootLogin = "no";
+    listenAddresses = [
+      {
+        addr = "192.168.0.53";
+        port = 2022;
+      }
+    ];
+
   };
 
   # This value determines the NixOS release with which your system is to be
