@@ -302,7 +302,7 @@ in
 
   # Allow login from other machines
   services.openssh = {
-    enable = true;
+    enable = false;
     passwordAuthentication = false;
     permitRootLogin = "no";
     listenAddresses = [
