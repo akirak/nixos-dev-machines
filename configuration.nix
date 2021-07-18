@@ -41,6 +41,7 @@ in
   '';
 
   networking.networkmanager.enable = true;
+
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   networking.resolvconf.dnsExtensionMechanism = false; # Disable edns0 in resolv.conf
@@ -324,7 +325,7 @@ in
 
   systemd.services.NetworkManager-wait-online.enable = false;
 
- # This value determines the NixOS release with which your system is to be
+  # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
