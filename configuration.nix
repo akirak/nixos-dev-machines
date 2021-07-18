@@ -79,12 +79,8 @@ in
     xorg.xf86inputlibinput
     stack
 
-    # podman installation for NixOS 20.03
-    # https://nixos.wiki/wiki/Podman
-    # podman
-    # runc
-    # conmon
-    # slirp4netns
+    # For podman
+    crun
 
     brave
 
