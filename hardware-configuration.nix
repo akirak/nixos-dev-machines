@@ -126,6 +126,7 @@
 
   # Based on https://github.com/adam-savard/keychron-k2-function-keys-linux
   systemd.services.keychron = {
+    enable = false;
     description = "Workaround to make the function keys on Keychron keyboards work";
     wantedBy = [ "multi-user.target" ];
 
