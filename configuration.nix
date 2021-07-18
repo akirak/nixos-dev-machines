@@ -86,6 +86,12 @@ in
     # slirp4netns
 
     brave
+
+    # SMART
+    # For skdump
+    libatasmart
+    # For smartctl
+    smartmontools
   ];
 
   environment.shells = with pkgs; [
@@ -307,7 +313,16 @@ in
 
   };
 
-  # This value determines the NixOS release with which your system is to be
+  services.smartd = {
+    enable = false;
+    notifications = {
+      x11 = {
+        enable = true;
+      };
+    };
+  };
+
+ # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
